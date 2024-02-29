@@ -1,0 +1,31 @@
+// WeatherCard.jsx
+import React from 'react';
+import { useContext } from 'react';
+import { WeatherContext } from '../context/WeatherContext';
+import { Card, CardContent, Typography } from '@material-ui/core';
+
+export function WeatherCard({ weather }) {
+  const { name, sys, main, weather: currentWeather } = weather;
+  const { cityName } = useContext(WeatherContext);
+
+  const formattedCity = name || cityName;
+
+  return (
+    <Card className="w-full max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <CardContent className="p-4">
+        <Typography variant="h5" className="font-bold text-2xl mb-2">
+          {formattedCity}
+        </Typography>
+        <Typography variant="subtitle1" className="text-gray-600 mb-4">
+          {sys.country}
+        </Typography>
+        <Typography variant="h5" className="font-bold text-5xl mb-4">
+          {main.temp}°C
+        </Typography>
+        <Typography variant="body1" className="text-gray-600">
+          {currentWeather[0].description}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+}

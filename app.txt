@@ -1,0 +1,32 @@
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from './hooks/useDarkMode';
+import GlobalStyle from './styles/GlobalStyle';
+import lightTheme from './styles/themes/lightTheme';
+import darkTheme from './styles/themes/darkTheme';
+import Home from './components/Home';
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Register from './components/Register';
+
+function App() {
+  const [theme, toggleTheme] = useDarkMode();
+
+  return (
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
+  );
+}
+
+export default App;

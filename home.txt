@@ -1,0 +1,23 @@
+// Home.jsx
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button } from '../components/UI/Button';
+
+function Home() {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push('/login');
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-blue-700">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-white">Witaj w Visun, twoim niezbędnym przyjacielem podczas podróżowania</h1>
+        <Button onClick={handleClick}>Dołącz do nas</Button>
+      </div>
+    </div>
+  );
+}
+
+export default Home;

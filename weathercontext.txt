@@ -1,0 +1,24 @@
+// context/WeatherContext.jsx
+import React, { createContext, useState } from 'react';
+
+const WeatherContext = createContext();
+
+export function WeatherProvider({ children }) {
+  const [cityName, setCityName] = useState('');
+  const [weatherData, setWeatherData] = useState([]);
+
+  const addWeatherData = (weather) => {
+    setWeatherData((prevData) => [...prevData, weather]);
+  };
+
+  const value = { cityName, setCityName, addWeatherData, weatherData };
+  return <WeatherContext.Provider value={value}>{children}</WeatherContext.Provider>;
+}
+
+export function useWeather() {
+  const context = React.useContext(WeatherContext);
+  if (!context) {
+    throw new Error('useWeather must be used within a WeatherProvider');
+  }
+  return context;
+}
